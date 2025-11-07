@@ -1,10 +1,10 @@
-import { render, html } from "https://cdn.jsdelivr.net/npm/lit-html@3/+esm";
 import { asyncLLM } from "https://cdn.jsdelivr.net/npm/asyncllm@2";
-import { parse } from "https://cdn.jsdelivr.net/npm/partial-json@0.1/+esm";
-import { openaiConfig } from "https://cdn.jsdelivr.net/npm/bootstrap-llm-provider@1";
 import { bootstrapAlert } from "https://cdn.jsdelivr.net/npm/bootstrap-alert@1";
+import { openaiConfig } from "https://cdn.jsdelivr.net/npm/bootstrap-llm-provider@1";
+import { html, render } from "https://cdn.jsdelivr.net/npm/lit-html@3/+esm";
+import { parse } from "https://cdn.jsdelivr.net/npm/partial-json@0.1/+esm";
 import saveform from "https://cdn.jsdelivr.net/npm/saveform@1.2";
-import { ruleCard, learningCard, editRuleModal, demoCards, validationTable } from "./components.js";
+import { demoCards, editRuleModal, learningCard, ruleCard, validationTable } from "./components.js";
 
 const $ = (s, el = document) => el.querySelector(s);
 function on(el, event, selector, handler) {
@@ -15,7 +15,7 @@ function on(el, event, selector, handler) {
 
 // Error wrapping helper
 function safe(title, fn) {
-  return function () {
+  return function() {
     try {
       return fn.apply(this, arguments);
     } catch (e) {
@@ -39,6 +39,7 @@ const state = {
   learnings: [], // { file, rules: [...] } or { edits: [...] }
   validations: [], // { file, id, result, reason }
   fileOrder: [], // stable column order for validations table
+  sampleDocs: [], // [{ outcome, title, body, filename }]
 };
 
 // Global rule lookup for efficient access by ID
@@ -65,7 +66,7 @@ function updateValidationLookup() {
 }
 
 // Fetch configuration
-const { schemas, demos } = await fetch("./config.json").then((r) => r.json());
+const { schemas, prompts, demos } = await fetch("./config.json").then((r) => r.json());
 
 // Save state to localStorage
 const saveState = safe("Could not save state", () => {
@@ -78,9 +79,11 @@ const loadState = safe("Could not load state", () => {
   if (saved) {
     const parsedState = JSON.parse(saved);
     Object.assign(state, parsedState);
+    state.sampleDocs = state.sampleDocs || [];
     updateRuleLookup();
     updateValidationLookup();
     redraw({});
+    renderSampleDocs();
   }
 });
 
@@ -91,12 +94,14 @@ function clearState() {
   state.learnings = [];
   state.validations = [];
   state.fileOrder = [];
+  state.sampleDocs = [];
   ruleLookup = {};
   validationLookup = {};
   processingFiles.clear();
   localStorage.removeItem("policyascode");
   redraw({});
   redrawValidations();
+  renderSampleDocs();
 }
 
 buttonClick($("#btn-ingest"), async () => {
@@ -228,6 +233,8 @@ buttonClick($("#btn-validate"), async () => {
   }
 });
 
+buttonClick($("#btn-generate-samples"), generateSampleDocuments);
+
 async function processValidation(source, name, isPdfBlob = false) {
   // Add file to processing set and render immediately to show column
   processingFiles.add(name);
@@ -243,8 +250,8 @@ async function processValidation(source, name, isPdfBlob = false) {
 
     const body = {
       model: $("#model").value,
-      instructions:
-        $("#policyascode-validation").value + "\n\nRules to validate against:\n" + JSON.stringify(state.rules),
+      instructions: $("#policyascode-validation").value + "\n\nRules to validate against:\n"
+        + JSON.stringify(state.rules),
       input: [{ role: "user", content: [content] }],
       text: { format: { type: "json_schema", strict: true, name: "validation", schema: schemas.validation } },
       stream: true,
@@ -274,6 +281,31 @@ async function processValidation(source, name, isPdfBlob = false) {
     processingFiles.delete(name);
     redrawValidations();
   }
+}
+
+async function generateSampleDocuments() {
+  if (state.rules.length === 0) {
+    bootstrapAlert({
+      title: "No rules available",
+      body: "Ingest policy documents first so sample documents can reference the extracted rules.",
+      color: "warning",
+    });
+    return;
+  }
+
+  const body = {
+    model: $("#model").value,
+    instructions: prompts.samples,
+    input: [{ role: "user", content: JSON.stringify({ rules: state.rules }) }],
+    text: { format: { type: "json_schema", strict: true, name: "documents", schema: schemas.samples } },
+    stream: true,
+  };
+
+  state.sampleDocs = [];
+  for await (const { content } of streamOpenAI(body)) state.sampleDocs = parse(content)?.documents ?? state.sampleDocs;
+
+  saveState();
+  renderSampleDocs();
 }
 
 async function consolidate() {
@@ -334,11 +366,13 @@ async function consolidate() {
 
 async function* streamOpenAI(body) {
   const { baseUrl, apiKey } = await openaiConfig({ defaultBaseUrls: BASE_URLS });
-  for await (const data of asyncLLM(`${baseUrl}/responses`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify(body),
-  })) {
+  for await (
+    const data of asyncLLM(`${baseUrl}/responses`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify(body),
+    })
+  ) {
     if (data.error) {
       bootstrapAlert({ title: "LLM Error", body: data.error, color: "danger" });
       throw new Error(data.error);
@@ -382,16 +416,18 @@ function redrawValidations() {
     state.fileOrder = [...existingFiles];
     changed = true;
   }
-  for (const f of existingFiles)
+  for (const f of existingFiles) {
     if (!state.fileOrder.includes(f)) {
       state.fileOrder.push(f);
       changed = true;
     }
-  for (const f of processing)
+  }
+  for (const f of processing) {
     if (!state.fileOrder.includes(f)) {
       state.fileOrder.push(f);
       changed = true;
     }
+  }
 
   // Only show files currently present (validated or in-progress), preserving first-seen order
   const files = state.fileOrder.filter((f) => presentSet.has(f));
@@ -403,6 +439,24 @@ function redrawValidations() {
   }
 
   render(validationTable(files, state, validationLookup), $("#validations-table"));
+}
+
+function renderSampleDocs(documents = state.sampleDocs) {
+  render(
+    html`
+      <div class="small text-muted text-center">Download example documents to test the current rule set.</div>
+      <div class="d-flex flex-wrap gap-2 justify-content-center w-100">
+        ${
+      documents.map((doc, index) =>
+        html`
+        <button type="button" class="btn btn-outline-secondary sample-download-btn" data-sample-index="${index}">
+          ${doc.title}
+        </button>
+      `
+      )
+    }</div>`,
+    $("#sample-docs"),
+  );
 }
 
 // When action buttons are clicked, disable, append a spinner, call handler, then re-enable and remove spinner
@@ -442,6 +496,18 @@ on(document, "click", ".delete-rule-btn", (e) => {
     saveState();
     bootstrapAlert({ title: "Rule deleted", body: `"${rule.title}" has been removed.`, color: "success" });
   }
+});
+
+on(document, "click", ".sample-download-btn", (e) => {
+  const btn = e.target.closest(".sample-download-btn");
+  const doc = state.sampleDocs[Number(btn.dataset.sampleIndex)];
+  if (!doc) return;
+  const url = URL.createObjectURL(new Blob([doc.body || ""], { type: "text/plain" }));
+  document.body.insertAdjacentHTML("beforeend", `<a href="${url}" download="${doc.filename}"></a>`);
+  const link = document.body.lastElementChild;
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
 });
 
 // Edit rule functionality
@@ -520,4 +586,5 @@ on(document, "click", ".demo-card", (e) => {
 
 // Load saved state on initialization
 loadState();
+renderSampleDocs();
 redrawValidations();

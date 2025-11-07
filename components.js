@@ -33,9 +33,11 @@ export function ruleCard(m) {
         <div class="mb-2">
           <strong>Sources:</strong>
           <ul class="small m-0">
-            ${(m.sources || []).map(
-              (s) => html`<li>"${s.quote}" <span class="text-muted">— ${s.file || s.filename || ""}</span></li>`,
-            )}
+            ${
+    (m.sources || []).map(
+      (s) => html`<li>"${s.quote}" <span class="text-muted">— ${s.file || s.filename || ""}</span></li>`,
+    )
+  }
           </ul>
         </div>
       </div>
@@ -58,11 +60,12 @@ function learningFileCard(l) {
       </summary>
       <div class="card-body">
         <div class="accordion" id="${accordionId}">
-          ${(l.rules || []).map((rule, index) => {
-            const collapseId = `${accordionId}-collapse-${index}`;
-            const headingId = `${accordionId}-heading-${index}`;
+          ${
+    (l.rules || []).map((rule, index) => {
+      const collapseId = `${accordionId}-collapse-${index}`;
+      const headingId = `${accordionId}-heading-${index}`;
 
-            return html`
+      return html`
               <div class="accordion-item">
                 <h2 class="accordion-header" id="${headingId}">
                   <button
@@ -99,7 +102,8 @@ function learningFileCard(l) {
                 </div>
               </div>
             `;
-          })}
+    })
+  }
         </div>
       </div>
     </details>
@@ -117,11 +121,12 @@ function learningEditCard(l, ruleLookup) {
       </summary>
       <div class="card-body">
         <div class="accordion" id="${accordionId}">
-          ${(l.edits || []).map((edit, index) => {
-            const collapseId = `${accordionId}-collapse-${index}`;
-            const headingId = `${accordionId}-heading-${index}`;
+          ${
+    (l.edits || []).map((edit, index) => {
+      const collapseId = `${accordionId}-collapse-${index}`;
+      const headingId = `${accordionId}-heading-${index}`;
 
-            return html`
+      return html`
               <div class="accordion-item">
                 <h2 class="accordion-header" id="${headingId}">
                   <button
@@ -143,13 +148,16 @@ function learningEditCard(l, ruleLookup) {
                 >
                   <div class="accordion-body">
                     <ol>
-                      ${(edit.ids ?? []).map((id) =>
-                        ruleLookup[id] ? html`<li>${ruleLookup[id].title}</li>` : html`<li>Unknown (${id})</li>`,
-                      )}
+                      ${
+        (edit.ids ?? []).map((id) =>
+          ruleLookup[id] ? html`<li>${ruleLookup[id].title}</li>` : html`<li>Unknown (${id})</li>`
+        )
+      }
                     </ol>
                     <div class="mb-2">${edit.reason}</div>
-                    ${edit.edit === "merge"
-                      ? html`
+                    ${
+        edit.edit === "merge"
+          ? html`
                           <hr />
                           <div class="mb-2">
                             <strong>New Rule:</strong>
@@ -160,7 +168,8 @@ function learningEditCard(l, ruleLookup) {
                             <span class="badge priority-${edit.priority} text-uppercase">${edit.priority}</span>
                           </div>
                         `
-                      : ""}
+          : ""
+      }
                     <div class="mb-0">
                       <strong>Rationale:</strong>
                       <div class="mt-1">${edit.rationale || "No rationale provided"}</div>
@@ -169,7 +178,8 @@ function learningEditCard(l, ruleLookup) {
                 </div>
               </div>
             `;
-          })}
+    })
+  }
         </div>
       </div>
     </details>
@@ -179,8 +189,10 @@ function learningEditCard(l, ruleLookup) {
 export function demoCards(demos) {
   return html`
     <div class="row g-3 justify-content-center mb-4">
-      ${demos.map(
-        (demo, index) => html`
+      ${
+    demos.map(
+      (demo, index) =>
+        html`
           <div class="col-md-4 col-lg-3">
             <div
               class="card demo-card h-100"
@@ -193,11 +205,13 @@ export function demoCards(demos) {
                 </div>
                 <h6 class="card-title h5 mb-2">${demo.title}</h6>
                 <p class="card-text text-muted mb-3">${demo.description}</p>
-                ${(demo.policies && demo.policies.length > 0) || (demo.validate && demo.validate.length > 0)
-                  ? html`
+                ${
+          (demo.policies && demo.policies.length > 0) || (demo.validate && demo.validate.length > 0)
+            ? html`
                       <div class="accordion w-100 text-start mt-auto" id="demo-acc-${index}">
-                        ${demo.policies && demo.policies.length > 0
-                          ? html`
+                        ${
+              demo.policies && demo.policies.length > 0
+                ? html`
                               <div class="accordion-item">
                                 <h2 class="accordion-header" id="demo-acc-${index}-heading-policies">
                                   <button
@@ -220,28 +234,30 @@ export function demoCards(demos) {
                                 >
                                   <div class="accordion-body p-0">
                                     <div class="list-group small">
-                                      ${demo.policies.map((url) => {
-                                        const filename = url.split("/").pop() || url;
-                                        return html`
-                                          <a
-                                            href="${url}"
-                                            target="_blank"
-                                            class="list-group-item text-start"
-                                            onclick="event.stopPropagation();"
-                                            title="Open ${filename} in new tab"
-                                          >
-                                            <i class="bi bi-file-earmark-text me-1"></i>${filename}
-                                          </a>`;
-                                      })}
+                                      ${
+                  demo.policies.map((url) => {
+                    const filename = url.split("/").pop() || url;
+                    return html` <a
+                                          href="${url}"
+                                          target="_blank"
+                                          class="list-group-item text-start"
+                                          onclick="event.stopPropagation();"
+                                          title="Open ${filename} in new tab"
+                                        >
+                                          <i class="bi bi-file-earmark-text me-1"></i>${filename}
+                                        </a>`;
+                  })
+                }
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             `
-                          : ""}
-
-                        ${demo.validate && demo.validate.length > 0
-                          ? html`
+                : ""
+            }
+                        ${
+              demo.validate && demo.validate.length > 0
+                ? html`
                               <div class="accordion-item">
                                 <h2 class="accordion-header" id="demo-acc-${index}-heading-validate">
                                   <button
@@ -264,33 +280,37 @@ export function demoCards(demos) {
                                 >
                                   <div class="accordion-body p-0">
                                     <div class="list-group small">
-                                      ${demo.validate.map((url) => {
-                                        const filename = url.split("/").pop() || url;
-                                        return html`
-                                          <a
-                                            href="${url}"
-                                            target="_blank"
-                                            class="list-group-item text-start"
-                                            onclick="event.stopPropagation();"
-                                            title="Open ${filename} in new tab"
-                                          >
-                                            <i class="bi bi-file-earmark-text me-1"></i>${filename}
-                                          </a>`;
-                                      })}
+                                      ${
+                  demo.validate.map((url) => {
+                    const filename = url.split("/").pop() || url;
+                    return html` <a
+                                          href="${url}"
+                                          target="_blank"
+                                          class="list-group-item text-start"
+                                          onclick="event.stopPropagation();"
+                                          title="Open ${filename} in new tab"
+                                        >
+                                          <i class="bi bi-file-earmark-text me-1"></i>${filename}
+                                        </a>`;
+                  })
+                }
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             `
-                          : ""}
+                : ""
+            }
                       </div>
                     `
-                  : ""}
+            : ""
+        }
               </div>
             </div>
           </div>
         `,
-      )}
+    )
+  }
     </div>
   `;
 }
@@ -354,33 +374,37 @@ export function validationTable(files, state, validationLookup) {
               </tr>
             </thead>
             <tbody>
-              ${state.rules.map(
-                (rule) => html`
+              ${
+    state.rules.map(
+      (rule) =>
+        html`
                   <tr>
                     <td class="fw-bold text-start align-top">${rule.title}</td>
-                    ${files.map((file) => {
-                      const validation = validationLookup[rule.id]?.[file];
-                      if (!validation) return html`<td class="text-center">—</td>`;
+                    ${
+          files.map((file) => {
+            const validation = validationLookup[rule.id]?.[file];
+            if (!validation) return html`<td class="text-center">—</td>`;
 
-                      const bgClass =
-                        validation.result === "pass"
-                          ? "table-success"
-                          : validation.result === "fail"
-                            ? "table-danger"
-                            : validation.result === "n/a"
-                              ? "table-secondary"
-                              : "table-warning";
+            const bgClass = validation.result === "pass"
+              ? "table-success"
+              : validation.result === "fail"
+              ? "table-danger"
+              : validation.result === "n/a"
+              ? "table-secondary"
+              : "table-warning";
 
-                      return html`
+            return html`
                         <td class="${bgClass} text-center align-top" style="max-width: 200px;">
                           <div class="fw-bold text-uppercase">${validation.result}</div>
                           <div class="small text-wrap">${validation.reason}</div>
                         </td>
                       `;
-                    })}
+          })
+        }
                   </tr>
                 `,
-              )}
+    )
+  }
             </tbody>
           </table>
         </div>

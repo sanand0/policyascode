@@ -14,6 +14,7 @@ The **Automated Investment Suitability Recommender (AISR)** matches retail clien
 This assessment evaluates the model against the **EU AI Act**, **PRA SS1/23**, and **NIST AI RMF 1.0**.
 
 **Overall Assessment:** High Risk, acceptable for deployment **with conditions**.
+
 - Strengths: Transparency, documented governance, consistent advisor oversight.
 - Weaknesses: Limited coverage of younger investors, inconsistent override logging.
 
@@ -30,6 +31,7 @@ This assessment evaluates the model against the **EU AI Act**, **PRA SS1/23**, a
 ## Risk Areas and Controls
 
 ### 1. Data Governance
+
 - **Inputs:**
   - Customer suitability questionnaires.
   - Historical product performance data.
@@ -40,16 +42,19 @@ This assessment evaluates the model against the **EU AI Act**, **PRA SS1/23**, a
 - **Findings:** Questionnaire wording may bias toward risk-averse selections.
 
 ### 2. Transparency
+
 - **Requirement:** Explain recommendations in plain language.
 - **Implementation:** Each recommendation includes a rationale string visible to clients.
 - **Gap:** Clients report rationales are too generic (e.g., “based on your risk profile”).
 
 ### 3. Human Oversight
+
 - **Requirement:** No autonomous execution of recommendations.
 - **Implementation:** Advisors must approve each recommendation.
 - **Gap:** Advisor override reasons only logged in 65% of cases; inconsistent analysis.
 
 ### 4. Monitoring
+
 - **Requirement:** Monitor drift, outcomes, fairness.
 - **Implementation:** Quarterly back-testing against actual portfolio performance.
 - **Thresholds:** Alert when portfolio recommendation distributions deviate by >10% vs. baseline.

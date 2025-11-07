@@ -50,6 +50,9 @@
       "source": "https://www.fca.org.uk/publication/policy/ps21-3-operational-resilience.pdf"
     }
   ],
+  "prompts": {
+    "samples": "You are helping a user test document validation against extracted rules.\nGenerate two short, plain-text documents using the rules provided.\n- The first document must clearly comply with the majority of rules (likely pass).\n- The second document must intentionally violate multiple important rules (likely fail).\nKeep the writing realistic for the same medium as the rules target.\nReturn JSON that lists the documents along with whether they should pass or fail."
+  },
   "schemas": {
     "rules": {
       "type": "object",
@@ -140,6 +143,30 @@
         }
       },
       "required": ["validations"],
+      "additionalProperties": false
+    },
+    "samples": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "properties": {
+              "outcome": { "type": "string", "enum": ["pass", "fail"] },
+              "title": { "type": "string" },
+              "body": { "type": "string" },
+              "filename": { "type": "string" },
+              "rationale": { "type": "string" }
+            },
+            "required": ["outcome", "title", "body", "filename", "rationale"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["documents"],
       "additionalProperties": false
     }
   }
