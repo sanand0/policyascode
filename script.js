@@ -482,7 +482,7 @@ $("#clear-storage-btn").addEventListener("click", () => {
 });
 
 // Persist inputs
-saveform("#policyascode-settings", { exclude: '[type="file"], #url-input, #validate-url-input' });
+saveform("#policyascode-settings", { exclude: "[type=\"file\"], #url-input, #validate-url-input" });
 
 // Delete rule functionality
 on(document, "click", ".delete-rule-btn", (e) => {

@@ -1,0 +1,55 @@
+Title: Informed Consent Form
+Study: A Randomized, Double-Blind, Placebo-Controlled Study of Glucofix in Type 2 Diabetes
+Sponsor: BioPharm Inc.
+Protocol: GF-302
+Version: 1.0 | Date: 2024-02-15
+
+Page 1 of 3
+1. Title and study information
+This document describes a 24-week study comparing Glucofix to placebo in 450 adults aged 18-65 with Type 2 diabetes and HbA1c 7.5-10.5%.
+
+2. Introduction/invitation
+You are invited to take part in this research study. Please review and discuss any questions with the study team.
+
+3. Why is this research being done?
+To evaluate whether Glucofix improves glucose control and safety compared with placebo and to collect information on long-term tolerability.
+
+4. What will happen during the study?
+- Screening: medical history, physical exam, ECG, labs, HbA1c, pregnancy test if applicable.
+- Baseline: randomization 1:1 to Glucofix or placebo, dosing instruction, glucose monitoring review.
+- Visits at Weeks 4, 8, 12, 16, 20, 24: vitals, labs, adverse event assessment, drug accountability, diary checks.
+- Study drug: oral tablet once daily with food. Continue background diabetes care as directed.
+- Samples: blood and urine for safety labs and exploratory biomarkers stored with coded identifiers.
+- Contraception: required during treatment and 30 days after last dose for those who could become pregnant.
+
+Page 2 of 3
+5. Risks and discomforts
+Known risks include hypoglycemia, gastrointestinal upset, and rare pancreatitis. Blood draws may cause bruising or dizziness. Please tell the team if you feel unwell.
+
+6. Benefits
+You may or may not benefit directly. Information gained may help future patients with diabetes.
+
+7. Alternative treatments
+You may continue standard diabetes care or adjust treatment with your regular healthcare provider without joining this study.
+
+8. Confidentiality
+Your data will be coded and stored securely. Authorized monitors and regulators may review study records for quality and compliance.
+
+9. Compensation and costs
+Study visits and procedures are provided at no cost. Travel reimbursement may be offered. Medical care for study-related injury will follow institutional policy.
+
+10. Voluntary participation and withdrawal
+Participation is voluntary. You can withdraw. Please discuss with the investigator to coordinate medication return and a safety visit.
+
+Page 3 of 3
+11. Contact information
+Principal Investigator: Dr. Maria Chen, Phone: 555-214-8801 (9 a.m.–5 p.m.)
+Study Coordinator: James Patel, Phone: 555-214-8802
+
+12. Signature page
+I have read this form and had the opportunity to ask questions.
+
+Participant Name: _____________________________   Date: ____________
+Participant Signature: _________________________  Date: ____________
+
+Person Obtaining Consent: ______________________ Date: ____________

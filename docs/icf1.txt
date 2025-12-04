@@ -1,0 +1,55 @@
+Title: Informed Consent Form
+Study: A Randomized, Double-Blind, Placebo-Controlled Study of Glucofix in Type 2 Diabetes
+Sponsor: BioPharm Inc.
+Protocol: GF-302
+Version: 1.0 | Date: 2024-02-15
+
+Page 1 of 3
+1. Title and study information
+This form describes the study evaluating Glucofix compared with placebo in adults aged 18-65 with Type 2 diabetes and HbA1c 7.5-10.5%. Approximately 450 participants will be enrolled for 24 weeks.
+
+2. Introduction/invitation
+You are being asked to join because you meet the health criteria and recent HbA1c levels. Please read this document carefully and discuss any questions with the study team before deciding whether to participate.
+
+3. Why is this study being done?
+The study measures whether Glucofix lowers HbA1c and improves glucose control compared with placebo. Additional objectives include safety monitoring and assessment of tolerability over 24 weeks.
+
+4. What will happen during the study?
+- Screening (Week -2 to 0): medical history, physical exam, ECG, vital signs, labs (chemistry, hematology, HbA1c), pregnancy test if applicable.
+- Baseline (Week 0): randomization 1:1 to Glucofix or placebo, study drug dispensed, training on dosing and hypoglycemia monitoring.
+- Follow-up visits: Weeks 4, 8, 12, 16, 20, and 24 for vitals, labs, glucose logs review, adverse event assessment, and drug accountability.
+- Study drug: oral tablet taken once daily with food. Continue standard diabetes care per investigator guidance.
+- Study samples: blood (~30 mL per visit) and urine will be collected for safety labs. Samples may be stored for future diabetes-related analyses.
+- Contraception: participants of childbearing potential must use effective contraception during the study and for 30 days after last dose.
+
+Page 2 of 3
+5. Risks and discomforts
+Potential side effects include low blood sugar symptoms, gastrointestinal upset, or other unexpected effects. Blood draws may cause brief pain or bruising. There is a small risk of confidentiality breach, which the team mitigates with coded IDs.
+
+6. Benefits
+You may or may not experience improved glucose control. The study may provide information that helps future patients with diabetes.
+
+7. Alternative treatments
+Alternatives include continuing current diabetes management without joining this study or adjusting therapy with your regular healthcare provider.
+
+8. Confidentiality
+Your data will be labeled with a unique study code. Study staff will store information in secure research records and limit access to authorized team members.
+
+9. Compensation and costs
+You will not be charged for study-related visits or procedures. You may receive reimbursement for reasonable travel expenses.
+
+10. Voluntary participation and withdrawal
+If you need to discontinue study procedures, speak with the study doctor to plan next steps. You will be asked to return study medication and may be scheduled for a final safety visit.
+
+Page 3 of 3
+11. Contact information
+Principal Investigator: Dr. Maria Chen, Phone: 555-214-8801, Email: mchen@trialsite.com
+Study Coordinator: James Patel, Phone: 555-214-8802
+
+12. Signature page
+I have read this form and had the opportunity to ask questions.
+
+Participant Name: _____________________________   Date: ____________
+Participant Signature: _________________________  Date: ____________
+
+Person Obtaining Consent: ______________________ Date: ____________

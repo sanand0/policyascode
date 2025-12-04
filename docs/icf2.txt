@@ -1,0 +1,57 @@
+Title: Informed Consent Form
+Study: A Randomized, Double-Blind, Placebo-Controlled Study of Glucofix in Type 2 Diabetes
+Sponsor: BioPharm Inc.
+Protocol: GF-302
+Version: 1.0 | Date: 2024-02-15
+
+Page 1 of 3
+1. Title and study information
+This consent covers participation in a 24-week study comparing Glucofix with placebo in 450 adults with Type 2 diabetes (HbA1c 7.5-10.5%).
+
+2. Introduction/invitation
+You are invited to join because your health history matches the study requirements. Please read carefully and ask questions before deciding.
+
+3. Why is this research being done?
+To learn how well Glucofix can improve glucose control and whether its safety profile supports broader use.
+
+4. What will happen during the study?
+- Screening: medical history, physical exam, ECG, labs, HbA1c, pregnancy test if applicable.
+- Baseline: randomization to Glucofix or placebo, dosing instruction, glucose monitoring training.
+- Visits at Weeks 4, 8, 12, 16, 20, 24: vitals, labs, diaries review, adverse event checks, drug accountability.
+- Study drug: oral tablet once daily with food; continue background diabetes care as directed.
+- Samples: blood and urine for safety, stored with coded identifiers for diabetes-related analyses.
+- Contraception: required for participants who could become pregnant during treatment and for 30 days after.
+
+Page 2 of 3
+5. Risks and discomforts
+Taking part could involve possible side effects or discomfort. Some discomfort may occur from the study drug or study procedures. The study team will monitor you and provide instructions on what to do if you feel unwell.
+
+6. Benefits
+You may experience better glucose control, but this cannot be guaranteed. The information gained may help future patients.
+
+7. Alternative treatments
+You can manage diabetes with standard medications and lifestyle changes under the care of your usual healthcare provider without joining this study.
+
+8. Confidentiality
+Your records will be labeled with a study code. Only authorized study staff will review your records and store them securely.
+
+9. Compensation and costs
+Study visits and procedures are provided at no cost. You may be reimbursed for reasonable travel expenses. Medical care for injury related to the study drug will be provided per site policy.
+
+10. Voluntary participation and withdrawal
+Participation is voluntary. You may withdraw at any time without penalty or loss of benefits to which you are otherwise entitled. The investigator may discontinue your participation for safety reasons or non-compliance.
+
+Page 3 of 3
+11. Contact information
+Principal Investigator: Dr. Maria Chen, Phone: 555-214-8801 (daytime)
+Study Coordinator: James Patel, Phone: 555-214-8802
+24-hour Emergency Contact: 555-214-8899
+IRB Contact: Meridian IRB, Phone: 555-422-3000
+
+12. Signature page
+I have read this form, understand the information, and agree to participate.
+
+Participant Name: _____________________________   Date: ____________
+Participant Signature: _________________________  Date: ____________
+
+Person Obtaining Consent: ______________________ Date: ____________

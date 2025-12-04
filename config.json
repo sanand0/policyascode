@@ -42,12 +42,26 @@
       "validationPrompt": "Validate the provided AI governance document against each extracted rule. For each rule, return one of: pass, fail, n/a (rule not applicable), unknown (unsure — needs human review).\n\nContext for validation:\n- Focus on data governance, intended use documentation, transparency requirements\n- Check for human oversight controls, monitoring procedures, security measures\n- Look for bias testing, performance metrics, rollback plans\n- Verify lifecycle phase compliance and risk tier appropriateness\n\nReturn a validation result for each rule with:\n- id: the rule identifier\n- result: one of [\"pass\", \"fail\", \"n/a\", \"unknown\"]\n- reason: brief explanation citing specific evidence or gaps in the document"
     },
     {
-      "title": "Operational Resilience (DORA) Readiness",
-      "icon": "bi-shield-check",
-      "description": "Validate incident runbooks, cloud SLAs, and resilience self-assessments against DORA and UK operational resilience expectations for ICT risk.",
-      "extractionPrompt": "Extract atomic, testable rules from ONE policy document.\nKeep each rule minimal.\nWrite for an LLM to apply it unambiguously.\nAlways include concise rationale and quotes.\n\nContext additions (OpRes/DORA):\n- Source types: EU DORA (ICT risk, incident reporting, TPRM), FCA PS21/3 & PRA SS1/21 (important business services, impact tolerances).\n- Target artifacts: self-assessments, incident classification/runbooks, outsourcing/MSA clauses, BCP/DR test evidence, SLA/OLA documents.\n- For each rule, add: domain {Important services|Impact tolerances|Incident mgmt|Testing|TPRM|Contracting}, evidence expected, regulator timeframe/thresholds, severity, and testable acceptance (e.g., regulator notification ≤ x hours with named role owner).\n- Include clause/Article references and short quotes for audit traceability.",
-      "consolidationPrompt": "Suggest deletes and merges to remove duplicates and generalize rules where appropriate.\n\nConsolidation additions (OpRes/DORA):\n- Merge UK OpRes and DORA rules where intent matches; keep time-bound thresholds as parameters.\n- Collapse repeated contract-clause checks (audit/access/exit/data location) into a single reusable contract control with sub-checks.\n- Remove narrative duplicates; keep the most measurable version and retain all citations.\n- Standardize domain tags and notification/time thresholds across rules.",
-      "source": "https://www.fca.org.uk/publication/policy/ps21-3-operational-resilience.pdf"
+      "title": "ICH E6(R2) Informed Consent Compliance",
+      "icon": "bi-file-earmark-medical",
+      "description": "Validate informed consent forms (ICFs) for a clinical trials against ICH E6(R2) Section 4.8 requirements for informed consent.",
+      "extractionPrompt": "Extract atomic, testable rules from ONE policy document.\nKeep each rule minimal.\nWrite for an LLM to apply it unambiguously.\nAlways include concise rationale and quotes.\n\nContext additions (ICF compliance):\n- Source: ICH E6(R2) Good Clinical Practice, especially Section 4.8 (Informed Consent of Trial Subjects).\n- Target artifacts: informed consent forms, participant information sheets, site consent templates.\n- Capture MUST/SHOULD strength, responsible party (investigator vs sponsor), and when in the process the obligation applies (pre-consent, at consent, post-consent updates).\n- For each rule, include: subject rights, voluntariness, risk/benefit disclosure, confidentiality/data access, injury compensation, contacts (investigator/IRB), withdrawal handling, vulnerable populations/embryo-fetal risk, and documentation/signature requirements.\n- Include measurable tests (e.g., states voluntariness with no coercion; discloses foreseeable risks including pregnancy risks; gives IRB contact and 24/7 medical contact; explains costs/compensation and injury treatment).\n- Always provide section/paragraph references with short quotes for traceability.",
+      "consolidationPrompt": "Suggest deletes and merges to remove duplicates and generalize rules where appropriate.\n\nConsolidation additions (ICF compliance):\n- Combine overlapping consent elements into single rules with clear sub-checks (e.g., voluntariness + withdrawal rights) while preserving citations.\n- Keep the strongest obligation wording (MUST/SHOULD) and ensure responsible party/timepoint tags stay attached.\n- Remove narrative-only items; keep rules with testable consent language, documentation steps, or contact/compensation specifics.\n- Normalize terms for risks, benefits, contacts, confidentiality, and signature/documentation so validators can align across sections.",
+      "source": "https://database.ich.org/sites/default/files/E6_R2_Addendum.pdf",
+      "policies": [
+        "docs/e6r2-1.pdf",
+        "docs/e6r2-2.pdf",
+        "docs/e6r2-3.pdf",
+        "docs/e6r2-4.pdf"
+      ],
+      "validate": [
+        "docs/icf1.txt",
+        "docs/icf2.txt",
+        "docs/icf3.txt",
+        "docs/icf4.txt",
+        "docs/icf5.txt"
+      ],
+      "validationPrompt": "Validate the informed consent form against each ICH E6(R2) informed consent rule. For each rule, return one of: pass, fail, n/a (rule not applicable), unknown (unsure — needs human review).\n\nContext for validation:\n- Study: \"A Randomized, Double-Blind, Placebo-Controlled Study of Glucofix in Type 2 Diabetes\" (24 weeks, 450 adults 18-65, HbA1c 7.5-10.5%).\n- Visits: Screening, Baseline, Weeks 4, 8, 12, 16, 20, 24. Investigational product vs placebo; risks: hypoglycemia, GI upset, rare pancreatitis; sponsor: BioPharm Inc.\n- Check consent language for voluntariness, research purpose, procedures/visit schedule, risks (incl. pregnancy/embryo-fetal), benefits/alternatives, confidentiality/data access (sponsor/monitors/IRB/FDA), costs/compensation including injury care, contacts (PI, 24-hour emergency, IRB), and withdrawal rights.\n\nReturn a validation result for each rule with:\n- id: the rule identifier\n- result: one of [\"pass\", \"fail\", \"n/a\", \"unknown\"]\n- reason: brief explanation citing specific evidence or gaps in the document"
     }
   ],
   "prompts": {
