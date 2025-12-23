@@ -120,15 +120,25 @@
                 <option value="gpt-4.1-nano"></option>
                 <option value="gpt-5-mini"></option>
                 <option value="gpt-5-nano"></option>
+                <option value="gpt-5.2"></option>
               </datalist>
             </div>
           </div>
           <div class="mt-3 d-flex gap-2"></div>
           <div class="mt-4">
             <label for="policyascode-extraction" class="form-label fw-bold">Extraction Prompt</label>
-            <textarea id="policyascode-extraction" class="form-control font-monospace" rows="6">Extract atomic, testable rules from ONE policy document.
-Keep each rule minimal.
+            <textarea id="policyascode-extraction" class="form-control font-monospace" rows="10">Extract atomic, testable rules from this policy document.
+
+IMPORTANT: Analyze ALL content including:
+- Text paragraphs and sections
+- Diagrams, flowcharts, and architectural drawings - extract structural and relationship rules
+- Screenshots and UI elements - extract configuration and setup rules
+- Tables, charts, and data visualizations - extract data rules and constraints
+- Images with embedded text or procedures
+
+Keep each rule minimal and testable.
 Write for an LLM to apply it unambiguously.
+For rules extracted from visual elements, cite the source (e.g., "From diagram on page X").
 Always include concise rationale and quotes.</textarea>
           </div>
           <div class="mt-3">
@@ -137,14 +147,16 @@ Always include concise rationale and quotes.</textarea>
           </div>
           <div class="mt-3">
             <label for="policyascode-validation" class="form-label fw-bold">Validation Prompt</label>
-            <textarea id="policyascode-validation" class="form-control font-monospace" rows="6">Validate the provided document against each rule. For each rule, determine if the document passes, fails, or if it's unknown/unclear.
+            <textarea id="policyascode-validation" class="form-control font-monospace" rows="8">Validate the provided document against each rule. Analyze ALL content including text, diagrams, screenshots, tables, and images.
+
+For each rule, determine if the document passes, fails, or if it's unknown/unclear.
 
 Return a validation result for each rule with:
 - id: the rule identifier
 - result: "pass" if the document complies, "fail" if it violates the rule, "unknown" if unclear or not applicable
 - reason: brief explanation of why it passes, fails, or is unknown
 
-Be specific and cite relevant parts of the document in your reasoning.</textarea>
+Be specific and cite relevant parts of the document (including visual elements) in your reasoning.</textarea>
           </div>
         </div>
       </details>
@@ -201,7 +213,7 @@ Be specific and cite relevant parts of the document in your reasoning.</textarea
           <textarea id="validate-url-input" class="form-control font-monospace" rows="3" placeholder="Document URLs to validate (one per line)"></textarea>
         </div>
         <div class="d-flex gap-2 align-items-center justify-content-center">
-          <input id="validate-file-input" class="form-control w-auto flex-grow-1" type="file" accept=".txt,.md,.pdf" multiple>
+          <input id="validate-file-input" class="form-control w-auto flex-grow-1" type="file" accept=".txt,.md,.pdf,.csv" multiple>
           <button id="btn-validate" class="btn btn-success" type="button">
             Validate
           </button>
